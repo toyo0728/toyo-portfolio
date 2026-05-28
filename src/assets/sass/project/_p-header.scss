@@ -1,0 +1,85 @@
+@use '../global' as v;
+
+.p-header {
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background: v.$white;
+}
+
+.p-header__logo {
+  width: 190px;
+  height: auto;
+  justify-self: start;
+
+  @media (max-width: 767px) {
+    width: 110px;
+  }
+}
+
+.p-header__item {
+  color: v.$main-color;
+  font-family: v.$font-base;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 180%;
+  border: 2px solid transparent;
+  padding-inline: 8px;
+  box-sizing: border-box;
+
+  @media (any-hover: hover) {
+    &:hover {
+      border-color: v.$main-color;
+    }
+  }
+}
+
+.p-header__contact {
+  @media (max-width: 1000px) {
+    display: none;
+  }
+}
+
+.p-header__icon {
+  width: 42px;
+  height: 42px;
+  background: v.$main-color;
+  justify-self: end;
+  position: relative;
+  z-index: 101;
+
+  @media (min-width: 1000px) {
+    display: none;
+  }
+}
+
+.p-header__icon-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.p-header__icon-bar {
+  width: 18px;
+  height: 2px;
+  background-color: v.$light-gray;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  transform-origin: center;
+}
+
+.p-header__icon.is-open {
+  .p-header__icon-bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+    transition: all 0.4s ease;
+  }
+
+  .p-header__icon-bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .p-header__icon-bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+    transition: all 0.4s ease;
+  }
+}

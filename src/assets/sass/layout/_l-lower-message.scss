@@ -1,0 +1,18 @@
+@use "../global" as v;
+
+.l-lower-message {
+    padding-block: 200px 120px;
+    text-align: center;
+
+    @media (max-width: 767px) {
+      padding-block: 160px;
+    }
+}
+
+.l-lower-message__btn {
+    margin-block-start: 120px;
+
+    @media (max-width: 767px) {
+        margin-block-start: 40px;
+    }
+}

@@ -1,0 +1,115 @@
+@use "../global" as v;
+
+.p-archive-works__items {
+    margin-block-start: 60px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 100px;
+    grid-auto-flow: dense;
+    align-items: start;
+
+    @media (max-width: 767px) {
+      grid-template-columns: auto;
+      gap: 60px;
+    }
+}
+
+.p-archive-works-item {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: flex-start;
+  height: 100%;
+  transition:
+    transform .7s cubic-bezier(.22,1,.36,1),opacity .5s ease,
+    box-shadow .4s ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.03);
+  will-change: transform;
+  opacity: 1;
+
+  @media (max-width: 767px) {
+    gap: 20px;
+  }
+}
+
+/* FLIP用：非表示アイテム */
+.p-archive-works-item.is-hidden {
+  display: none;
+  transform: translateY(20px); /* 下から上にスライドして表示 */
+  opacity: 0;
+}
+
+.p-archive-works-item__img {
+  position: relative;
+  aspect-ratio: 550 / 305;
+  border-radius: 16px;
+  overflow: hidden;
+
+  @media (max-width: 767px) {
+    aspect-ratio: 343 / 182;
+    border-radius: 8px;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.p-archive-works-item__img img {
+  transition: transform .4s ease;
+}
+
+.p-archive-works-item:hover .p-archive-works-item__img img {
+  transform: scale(1.05);
+}
+
+.p-archive-works-item__categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.p-archive-works-item__category {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 200%; /* 28px */
+  letter-spacing: 0.7px;
+  padding: 7px 8px;
+  background: v.$main-color;
+  color: v.$white;
+}
+
+.p-archive-works-item__contents {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-inline: 10px;
+}
+
+.p-archive-works-item__title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 180%; /* 36px */
+    letter-spacing: 1px;
+
+    @media (max-width: 767px) {
+      font-size: 18px;
+      letter-spacing: 0.9px;
+    }
+}
+
+.p-archive-works-item__excerpt {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 180%; /* 28.8px */
+    letter-spacing: 0.8px;
+
+    @media (max-width: 767px) {
+      font-size: 14px;
+      letter-spacing: 0.7px;
+      line-height: 200%;
+    }
+}

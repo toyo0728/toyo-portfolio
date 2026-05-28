@@ -1,0 +1,109 @@
+@use '../global' as v;
+
+.p-loader {
+  position: fixed;
+  inset: 0;
+  background: v.$white;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+.p-loader.is-hide {
+  opacity: 0;
+}
+
+.p-loader__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* 共通 */
+.p-loader__img1,
+.p-loader__img2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition:
+    transform 0.9s ease,
+    opacity 0.8s ease;
+}
+
+/* ===== 1枚目 ===== */
+.p-loader__img1 {
+  transform: translate(-50%, -50%) perspective(800px) rotateY(90deg);
+  transform-origin: left center;
+  perspective: 800px;
+  z-index: 2;
+}
+
+.p-loader__img1 img {
+  display: block;
+  width: 278px;
+  height: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== 2枚目 ===== */
+.p-loader__img2 {
+  transform: translate(-50%, calc(-50% + 80px));
+  opacity: 0;
+  z-index: 3;
+}
+
+.p-loader__img2 img {
+  display: block;
+  width: 183px;
+  height: auto;
+}
+
+/* ===== 発火 ===== */
+.p-loader.is-active {
+  .p-loader__img1 {
+    animation: flipIn 1s ease forwards;
+  }
+
+  .p-loader__img2 {
+    animation: slideUp 0.8s ease forwards;
+    animation-delay: 1s;
+  }
+}
+
+/* ===== MVへ橋渡し ===== */
+.p-loader.is-bridge {
+  .p-loader__img1 {
+    opacity: 0;
+  }
+
+  .p-loader__img2 {
+    transform: translate(-50%, calc(-50% - 68px)) scale(1.08);
+    opacity: 1;
+  }
+}
+
+/* ===== アニメーション ===== */
+@keyframes flipIn {
+  0% {
+    transform: translate(-50%, -50%) perspective(800px) rotateY(90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) perspective(800px) rotateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translate(-50%, calc(-50% + 80px));
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(-50%, calc(-50% - 68px));
+    opacity: 1;
+  }
+}

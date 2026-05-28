@@ -1,0 +1,13 @@
+@use "../global" as v;
+
+.p-lower-contact__text {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 180%; /* 32.4px */
+    letter-spacing: 0.9px;
+
+    @media (max-width: 767px) {
+      font-size: 14px;
+      letter-spacing: 0.7px;
+    }
+}

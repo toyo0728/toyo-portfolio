@@ -1,0 +1,253 @@
+@use '../global/' as v;
+
+.p-value {
+  position: relative;
+  overflow: hidden;
+}
+
+.p-value-wrapper {
+  max-width: 1080px;
+  margin-block: 100px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  @media (max-width: 1024px) {
+    margin-block: 60px 40px;
+    gap: 40px;
+    flex-direction: column;
+  }
+}
+
+.p-value-left {
+  flex: 0 0 450px;
+}
+
+.p-value-right {
+  flex: 0 0 420px;
+  position: relative;
+  height: 420px;
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    display: none;
+    position: static;
+    width: 100%;
+  }
+}
+
+.p-value-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 80px;
+
+  &:nth-child(2),
+  &:nth-child(3) {
+    margin-block-start: 100px;
+
+    @media (max-width: 767px) {
+      margin-block-start: 40px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    flex-direction: column;
+    gap: 24px;
+    margin-block-end: 0;
+  }
+}
+
+.p-value__contents {
+  flex: 0 0 450px;
+
+  @media (max-width: 1024px) {
+    display: contents;
+    flex: none;
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 16px;
+  }
+}
+
+.p-value__tag {
+  color: v.$white;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 100%;
+  letter-spacing: 0.9px;
+  background: v.$main-color;
+  width: fit-content;
+  padding: 4px 8px;
+
+  @media (max-width: 767px) {
+    font-size: 16px;
+    letter-spacing: 0.8px;
+  }
+}
+
+.p-value__textWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-block-start: 60px;
+  padding-bottom: 120px;
+  border-bottom: 2px dashed v.$light-gray;
+
+  @media (max-width: 1024px) {
+    padding-inline: 16px;
+    padding-bottom: 40px;
+  }
+
+  @media (max-width: 767px) {
+    margin-block-start: 0;
+    gap: 16px;
+  }
+}
+
+.p-value__title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 160%;
+  letter-spacing: 1.4px;
+
+  @media (max-width: 767px) {
+    font-size: 20px;
+    letter-spacing: 1px;
+  }
+}
+
+.p-value__text {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 180%;
+  letter-spacing: 0.8px;
+
+  @media (max-width: 767px) {
+    font-size: 14px;
+    letter-spacing: 0.7px;
+  }
+}
+
+/* =========================
+  ICON（PC）
+========================= */
+
+/* PC用アイコンを重ねる */
+.p-value-icon--pc {
+  position: absolute;
+  inset: 0; /* top/left簡略 */
+  width: 100%;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95);
+  pointer-events: none;
+  will-change: transform, opacity;
+  z-index: 0;
+}
+
+.p-value-icon--pc.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  z-index: 1;
+}
+
+.p-value-icon--pc img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* =========================
+  ICON（SP）
+========================= */
+
+.p-value-icon--sp {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .p-value-icon--sp {
+    display: block;
+    max-width: 300px;
+    margin-inline: auto;
+  }
+
+  .p-value-icon--sp img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .p-value-icon--sp {
+    width: calc(220 / 375 * 100%);
+  }
+}
+
+/* ===============================
+   VALUE Marquee
+================================ */
+.p-value-marquee {
+  width: 100%;
+  pointer-events: none;
+}
+
+/* アニメーション用トラック */
+.p-value-marquee__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee 50s linear infinite;
+  animation-play-state: paused; /* 初回停止 */
+}
+
+.p-value-marquee__track.is-ready {
+  animation-play-state: running; /* 読み込み後に開始 */
+}
+
+/* テキスト列 */
+.p-value-marquee__inner {
+  display: flex;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* テキストスタイル */
+.p-value-marquee__inner span {
+  flex-shrink: 0;
+  color: v.$light-gray;
+  font-size: 160px;
+  font-weight: 700;
+  line-height: 1;
+  padding-right: 3rem;
+}
+
+@media (max-width: 767px) {
+  .p-value-marquee__inner span {
+    font-size: 100px;
+  }
+}
+
+/* アニメーション */
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* モーション軽減設定 */
+@media (prefers-reduced-motion: reduce) {
+  .p-value-marquee__track,
+  .p-value-marquee__track.is-ready {
+    animation: none;
+  }
+}

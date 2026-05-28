@@ -1,0 +1,152 @@
+@use '../global' as v;
+
+.p-contact-cta {
+  margin-block-end: 100px;
+
+  @media (max-width: 767px) {
+    margin-block-start: 80px;
+    margin-block-end: 40px;
+  }
+}
+
+.p-contact-cta__link {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  width: 100%;
+  aspect-ratio: 1280/540;
+
+  @media (max-width: 767px) {
+    aspect-ratio: 343 / 240;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.5s ease;
+  }
+
+  &::before {
+    background: url(../img/contact-bg.webp) no-repeat center / cover;
+    opacity: 1;
+    z-index: 1;
+  }
+
+  &::after {
+    background: linear-gradient(0deg, rgba(64, 147, 192, 0.85) 0%, rgba(64, 147, 192, 0.85) 100%),
+      url(../img/contact-bg.webp) lightgray 0.302px -58.987px / 100% 158.025% no-repeat;
+    opacity: 0;
+    z-index: 2;
+
+    @media (max-width: 767px) {
+      opacity: 0.7; /* スマホでは常に半透明のオーバーレイを表示 */
+    }
+  }
+
+  &:hover::after {
+    opacity: 0.7;
+  }
+
+  &:hover .p-contact-cta__icon {
+    transform: scale(1.9);
+
+    @media (max-width: 767px) {
+      transform: none; /* スマホでは拡大効果を無効化 */
+    }
+  }
+
+  &:hover .p-contact-cta__icon::before {
+    opacity: 1;
+  }
+}
+
+.p-contact-cta__wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  text-align: center;
+  color: v.$white;
+  z-index: 3;
+
+  @media (max-width: 767px) {
+    gap: 16px;
+  }
+}
+
+.p-contact-cta__title-en {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 100%; /* 24px */
+  letter-spacing: 1.2px;
+
+  @media (max-width: 767px) {
+    font-size: 15px;
+    letter-spacing: 0.75px;
+  }
+}
+
+.p-contact-cta__title-ja {
+  position: relative;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 140%; /* 24px */
+  letter-spacing: 2px;
+  padding: 4px 16px;
+  border: 4px solid v.$white;
+
+  @media (max-width: 767px) {
+    font-size: 20px;
+    letter-spacing: 1px;
+    border-width: 2px;
+  }
+}
+
+.p-contact-cta__icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: v.$white;
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+
+  @media (max-width: 767px) {
+    width: 40px;
+    height: 40px;
+    transform: none; // スマホでは拡大効果を無効化
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    background: url('../img/arrow.svg') no-repeat center / contain;
+    width: 5px;
+    height: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 2;
+    pointer-events: none;
+
+    @media (max-width: 767px) {
+      opacity: 1; // スマホでは常に矢印を表示
+      width: 10px;
+      height: 10px;
+    }
+  }
+}

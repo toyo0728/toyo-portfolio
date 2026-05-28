@@ -1,0 +1,45 @@
+@use "../global" as v;
+
+.l-header {
+    width: 100%;
+    height: auto;
+    padding-block: 16px;
+    // position: fixed;
+    z-index: 100;
+
+    @media (max-width: 767px) {
+        padding-block: 14px;
+    }
+}
+
+.l-header__inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    padding-inline: 40px;
+    align-items: center;
+
+    @media (max-width: 1000px) {
+        grid-template-columns: 1fr auto;
+    }
+
+    @media (max-width: 767px) {
+        padding-inline: 16px;
+    }
+}
+
+.l-header__nav {
+    justify-self: center;
+
+    @media (max-width: 1000px) {
+      display: none;
+    }
+}
+
+.l-header__list {
+    display: flex;
+    gap: 40px;
+
+    @media (max-width: 1100px) {
+      gap: 30px;
+    }
+}

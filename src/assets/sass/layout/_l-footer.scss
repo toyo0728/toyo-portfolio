@@ -1,0 +1,29 @@
+@use "../global" as v;
+
+.l-footer {
+    padding-block-start: 60px;
+    padding-inline: 100px;
+    background: v.$black;
+
+    @media (max-width: 1000px) {
+      padding-inline: 60px;
+    }
+
+    @media (max-width: 767px) {
+        padding-block-end: 24px;
+        padding-inline: 16px;
+    }
+}
+
+.l-footer__list {
+    margin-block: 40px;
+    display: flex;
+    gap: 80px;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 767px) {
+        flex-direction: column;
+        gap: 20px;
+    }
+}

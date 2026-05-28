@@ -1,0 +1,20 @@
+@use "../global" as v;
+
+.p-drawer__list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.p-drawer__item {
+    color: v.$main-color;
+    font-family: v.$font-base;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 180%;
+}
+
+.p-drawer__item img {
+    width: 110px;
+    height: auto;
+}

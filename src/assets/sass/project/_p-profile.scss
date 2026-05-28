@@ -1,0 +1,572 @@
+@use '../global/' as v;
+
+/* ===============================
+   セクション本体
+================================ */
+.p-profile {
+  position: relative;
+  padding-block: 100px;
+  margin-block-start: 32px;
+  background: v.$main-color;
+  border-radius: 60px;
+  overflow: hidden;
+
+  @media (max-width: 767px) {
+    padding-block: 60px;
+    border-radius: 24px;
+  }
+}
+
+.p-profile__body {
+  margin-block-start: 100px;
+
+  @media (max-width: 767px) {
+    margin-block-start: 60px;
+  }
+}
+
+/* ===============================
+   背景文字
+================================ */
+.p-profile__logoMotion {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.p-profile__logoMotion-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee 50s linear infinite;
+  animation-play-state: paused; /* 初回は停止 */
+}
+
+.p-profile__logoMotion-track.is-ready {
+  animation-play-state: running;
+}
+
+.p-profile__logoMotion-text {
+  display: flex;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.p-profile__logoMotion-text span {
+  flex-shrink: 0;
+  color: rgba(233, 228, 216, 0.5);
+  font-size: 160px;
+  font-weight: 700;
+  line-height: 1;
+  padding-right: 3rem;
+}
+
+/* レスポンシブ */
+@media (max-width: 899px) {
+  .p-profile__logoMotion-text span {
+    font-size: 120px;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ===============================
+   カードエリア
+================================ */
+.p-profile__cardCnt {
+  position: relative;
+  min-height: 800px;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-content: space-between;
+  overflow: hidden;
+
+  @media (min-width: 1500px) {
+    min-height: 850px;
+  }
+
+  @media (max-width: 899px) {
+    min-height: 640px;
+    display: block;
+    overflow: visible;
+  }
+}
+
+/* Swiper本体 */
+.p-profile .profile-swiper {
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 〜479px */
+@media (max-width: 479px) {
+  .p-profile .profile-swiper {
+    height: auto;
+    display: block;
+    padding-inline: 20px;
+  }
+}
+
+/* 480〜767px */
+@media (min-width: 480px) and (max-width: 767px) {
+  .p-profile .profile-swiper {
+    height: auto;
+    display: block;
+    padding-inline: 12px;
+  }
+}
+
+/* 768〜899px */
+@media (min-width: 768px) and (max-width: 899px) {
+  .p-profile .profile-swiper {
+    height: auto;
+    display: block;
+    padding-inline: 16px;
+  }
+}
+
+.p-profile .profile-swiper .swiper-wrapper {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.p-profile .profile-swiper .swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+
+/* 外枠 */
+.p-profile .p-profile-card {
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.p-profile-cardIn {
+  cursor: pointer;
+}
+
+/* 実カードサイズ：PC */
+@media (min-width: 900px) {
+  .p-profile .p-profile-cardIn,
+  .p-profile-card {
+    width: clamp(440px, 38vw, 520px);
+    height: 640px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 374px) {
+   .p-profile .p-profile-cardIn {
+    height: 440px;
+  }
+}
+
+/* 〜479px */
+@media (max-width: 479px) {
+  .p-profile .p-profile-cardIn {
+    width: 280px;
+    height: 480px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: block;
+  }
+}
+
+/* 480〜767px */
+@media (min-width: 480px) and (max-width: 767px) {
+  .p-profile .p-profile-cardIn {
+    width: min(380px, 72vw);
+    height: 520px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: block;
+  }
+}
+
+/* 768〜899px */
+@media (min-width: 768px) and (max-width: 899px) {
+  .p-profile .p-profile-cardIn {
+    width: min(400px, 72vw);
+    height: 560px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: block;
+  }
+}
+
+/* ===============================
+   ナビ
+================================ */
+.p-profile__nav {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  position: relative;
+  z-index: 10;
+
+  @media (max-width: 899px) {
+    margin-block-start: 80px;
+  }
+
+  @media (max-width: 767px) {
+    margin-block-start: 60px;
+  }
+}
+
+.p-profile .swiper-button-prev,
+.p-profile .swiper-button-next {
+  position: static;
+  width: 80px;
+  height: 80px;
+  background: v.$white;
+  padding: 0;
+
+  @media (max-width: 767px) {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.p-profile .swiper-button-prev::after,
+.p-profile .swiper-button-next::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 15px;
+}
+
+.p-profile .swiper-button-next::after {
+  background: url('../img/arrow.svg') no-repeat center / contain;
+}
+
+.p-profile .swiper-button-prev::after {
+  background: url('../img/arrow-reverse.svg') no-repeat center / contain;
+}
+
+/* ページネーション */
+// .p-profile .profile-swiper .swiper-pagination {
+//   position: static;
+//   display: flex;
+//   gap: 16px;
+//   align-items: center;
+//   justify-content: center;
+
+//   @media (max-width: 899px) {
+//     margin-top: 60px;
+//     padding-top: 0;
+//   }
+
+//   @media (min-width: 900px) {
+//     display: none;
+//   }
+// }
+
+// .p-profile .js-profile-pagination .swiper-pagination-bullet {
+//   width: 10px;
+//   height: 10px;
+//   background: v.$white;
+//   border-radius: 0;
+//   opacity: 1;
+// }
+
+// .p-profile .js-profile-pagination .swiper-pagination-bullet-active {
+//   background: #6b6b6b;
+//   border-radius: 0;
+//   opacity: 1;
+// }
+
+/* ===============================
+   3Dカルーセル演出（SP対応）
+================================ */
+
+/* ===== SP・タブレット（～899px） ===== */
+@media (max-width: 899px) {
+  .p-profile .profile-swiper {
+    --tilt: 2deg;
+    --side-scale: 0.94;
+    --side-opacity: 0.85;
+    --side-offset: 24px;
+  }
+
+  .p-profile .profile-swiper .swiper-slide {
+    transition: transform 0.4s ease, opacity 0.3s ease;
+    transform-origin: center center;
+    opacity: var(--side-opacity);
+    z-index: 1;
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  .p-profile .profile-swiper .swiper-slide-active {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+    z-index: 4;
+  }
+
+  .p-profile .profile-swiper .swiper-slide-next {
+    transform: translate3d(var(--side-offset), 0, 0) rotate(var(--tilt)) scale(var(--side-scale));
+    opacity: 0.95;
+    z-index: 3;
+  }
+
+  .p-profile .profile-swiper .swiper-slide-prev {
+    transform: translate3d(calc(var(--side-offset) * -1), 0, 0) rotate(calc(var(--tilt) * -1))
+      scale(var(--side-scale));
+    opacity: 0.95;
+    z-index: 3;
+  }
+
+  /* 2枚外側 */
+  .p-profile .profile-swiper .swiper-slide.swiper-slide-prev2 {
+    transform: translate3d(calc(var(--side-offset) * -1.6), 0, 0) rotate(-4deg)
+      scale(calc(var(--side-scale) * 0.96));
+    opacity: 0.6;
+    z-index: 2;
+  }
+
+  .p-profile .profile-swiper .swiper-slide.swiper-slide-next2 {
+    transform: translate3d(calc(var(--side-offset) * 1.6), 0, 0) rotate(4deg)
+      scale(calc(var(--side-scale) * 0.96));
+    opacity: 0.6;
+    z-index: 2;
+  }
+}
+
+/* ===== PC（900px以上） ===== */
+@media (min-width: 900px) {
+  .p-profile .profile-swiper {
+    --tilt: 3deg;
+    --side-scale: 0.92;
+    --side-opacity: 0.75;
+    --side-offset: 60px;
+  }
+
+  .p-profile .profile-swiper .swiper-slide {
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+    will-change: transform;
+    transform-origin: center center;
+    opacity: var(--side-opacity);
+    z-index: 1;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  .p-profile .profile-swiper .swiper-slide-active {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+    z-index: 4;
+  }
+
+  .p-profile .profile-swiper .swiper-slide-next {
+    transform: translate3d(var(--side-offset), 0, 0) rotate(var(--tilt)) scale(var(--side-scale));
+    opacity: 0.9;
+    z-index: 3;
+  }
+
+  .p-profile .profile-swiper .swiper-slide-prev {
+    transform: translate3d(calc(var(--side-offset) * -1), 0, 0) rotate(calc(var(--tilt) * -1))
+      scale(var(--side-scale));
+    opacity: 0.9;
+    z-index: 3;
+  }
+
+  .p-profile .profile-swiper .swiper-slide.swiper-slide-prev2 {
+    transform: translate3d(calc(var(--side-offset) * -1.9), 0, 0) rotate(-6deg)
+      scale(calc(var(--side-scale) * 0.96));
+    opacity: 0.6;
+    z-index: 2;
+  }
+
+  .p-profile .profile-swiper .swiper-slide.swiper-slide-next2 {
+    transform: translate3d(calc(var(--side-offset) * 1.9), 0, 0) rotate(6deg)
+      scale(calc(var(--side-scale) * 0.96));
+    opacity: 0.6;
+    z-index: 2;
+  }
+}
+
+/* ===== 超ワイドディスプレイ ===== */
+@media (min-width: 1920px) {
+  .p-profile .profile-swiper {
+    --side-offset: 10px;
+  }
+}
+
+/* 非アクティブ暗幕 */
+.p-profile .profile-swiper .p-profile-card__overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%),
+    linear-gradient(
+      180deg,
+      rgba(107, 107, 107, 0) 48.3%,
+      rgba(107, 107, 107, 0.8) 72.16%,
+      #4b4948 100%
+    );
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+
+.p-profile .profile-swiper .swiper-slide-active .p-profile-card__overlay {
+  opacity: 0;
+}
+
+/* ===============================
+   カード本体
+================================ */
+
+.p-profile-cardIn {
+  position: relative;
+  display: block;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.p-profile-card__img {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+.p-profile-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===============================
+   テキスト
+================================ */
+.p-profile__textarea {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 24px 24px 40px;
+  color: v.$white;
+  text-align-last: left;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 899px) {
+  .p-profile__textarea {
+    padding: 24px 16px 28px;
+  }
+}
+
+.p-profile__titleWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.p-profile__title-text1 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 180%;
+  letter-spacing: 0.9px;
+}
+
+@media (max-width: 899px) {
+  .p-profile__title-text1 {
+    font-size: 14px;
+    letter-spacing: 0.7px;
+  }
+}
+
+.p-profile__title-text2 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 180%;
+  letter-spacing: 1.2px;
+}
+
+@media (max-width: 899px) {
+  .p-profile__title-text2 {
+    font-size: 18px;
+    letter-spacing: 0.9px;
+  }
+}
+
+.p-profile__text {
+  margin-block-start: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 180%;
+  letter-spacing: 0.3px;
+  text-align: start;
+}
+
+@media (max-width: 899px) {
+  .p-profile__text {
+    font-size: 14px;
+    letter-spacing: 0.7px;
+  }
+}
+
+.p-profile__sns {
+  margin-block-start: 24px;
+}
+
+.p-profile__sns-link {
+  width: 44px;
+  height: 44px;
+}
+
+.p-profile__more {
+  display: inline-flex;
+  width: 184px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding-inline: 24px;
+  white-space: nowrap;
+  margin-top: auto;
+  align-self: flex-end;
+  border-bottom: 2px solid v.$white;
+  pointer-events: none;
+
+  @media (max-width: 899px) {
+    width: 140px;
+    padding-inline: 8px;
+  }
+}
+
+.p-profile__moreText {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 180%;
+  letter-spacing: 0.8px;
+
+  @media (max-width: 899px) {
+    font-size: 14px;
+    letter-spacing: 0.7px;
+  }
+}

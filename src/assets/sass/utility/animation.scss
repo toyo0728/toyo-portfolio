@@ -1,0 +1,47 @@
+@use "../global" as v;
+
+.animation-fade {
+  opacity: 0;
+  transition: opacity 1.8s ease;
+
+  &.is-show {
+    opacity: 1;
+  }
+}
+
+.animation-left {
+  // before (出現前)
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.3s ease;
+
+  // after (出現後)
+  &.is-show {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.animation-right {
+  // before (出現前)
+  clip-path: inset(0 0 0 100%);
+  transition: clip-path 1.0s ease;
+
+  // after (出現後)
+  &.is-show {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.animation-scale {
+  overflow: hidden; // はみ出し防止
+
+  img {
+    transform: scale(1.3); // 少し拡大した状態
+    transition: transform 1.0s ease;
+  }
+
+  &.is-show {
+    img {
+      transform: scale(1);
+    }
+  }
+}

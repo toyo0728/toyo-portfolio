@@ -1,0 +1,86 @@
+@use "../global" as v;
+
+.p-footer {
+    background: v.$black;
+}
+
+.p-footer__logo {
+    width: 190px;
+    height: auto;
+    display: block;
+    margin-inline: auto;
+
+    @media (max-width: 767px) {
+      width: 142px;
+    }
+}
+
+.p-footer__item {
+    color: v.$white;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 180%;
+
+    @media (max-width: 767px) {
+      font-size: 16px;
+    }
+}
+
+/* フッターロゴとメニューのホバーエフェクト */
+.p-footer__logo,
+.p-footer__item a {
+  transition: opacity 0.3s ease;
+}
+
+.p-footer__logo:hover,
+.p-footer__item a:hover {
+  opacity: 0.6;
+}
+
+.p-footer__nameLogo {
+    width: min(1240px, 100%);
+    height: auto;
+    display: block;
+    margin-inline: auto;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
+}
+
+.p-footer__name {
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  margin-block: 40px;
+
+  @media (min-width: 767px) {
+    display: none;
+  }
+}
+
+.p-footer__name p {
+  color: #6B6B6B;
+  text-align: center;
+  font-size: 39px;
+  font-weight: 900;
+  line-height: 1;
+
+  @media (max-width: 374px) {
+    font-size: 30px;
+  }
+}
+
+/* コピーライト */
+.p-footer__copyright {
+    font-size: 12px;
+    color: v.$white;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    text-align: center;
+
+    @media (min-width: 767px) {
+      display: none;
+    }
+}

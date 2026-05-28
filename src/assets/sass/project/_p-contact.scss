@@ -1,0 +1,276 @@
+@use "../global" as v;
+
+.p-contact {
+    margin-block-start: 80px;
+
+    @media (max-width: 767px) {
+      margin-block-start: 40px;
+    }
+}
+
+.p-contact__form {
+    max-width: 800px;
+    margin-inline: auto;
+}
+
+.p-contact__row {
+    padding-block-end: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 16px;
+
+    @media (max-width: 767px) {
+      padding-top: 23px;
+      padding-bottom: 23px;
+    }
+}
+
+.p-contact__row--last {
+    padding-block-end: 60px;
+
+    @media (max-width: 767px) {
+        padding-block-end: 24px;
+    }
+}
+
+.p-contact__head {
+    position: relative;
+    white-space: nowrap;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 180%; /* 28.8px */
+    letter-spacing: 0.8px;
+
+    span.--must {
+        position: relative;
+        display: inline-block;
+
+        &::after {
+            content: "必須";
+            position: absolute;
+            top: calc(50% + 1px);
+            translate: 0 -50%;
+            left: calc(100% + 16px);
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.8;
+            letter-spacing: 0.7px;
+            display: inline-block;
+            padding: 0 16px;
+            background: v.$main-color;
+            color: v.$white;
+            white-space: nowrap;
+        }
+    }
+
+    span.--free {
+        position: relative;
+        display: inline-block;
+
+        &::after {
+            content: "任意";
+            position: absolute;
+            top: calc(50% + 1px);
+            translate: 0 -50%;
+            left: calc(100% + 16px);
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.8;
+            letter-spacing: 0.7px;
+            display: inline-block;
+            padding: 0 16px;
+            background: v.$white;
+            color: v.$main-color;
+            border: 1px solid v.$main-color;
+            white-space: nowrap;
+        }
+    }
+}
+
+.p-contact-checkbox .wpcf7-list-item-label {
+  position: relative;
+  padding-left: 32px;
+  cursor: pointer;
+  display: inline-block;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    border: 1px solid v.$main-color;
+    background: v.$white;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background: url(../img/check.svg) no-repeat center center / 17px 17px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+}
+
+/* チェック時にチェックマーク表示 */
+.p-contact-checkbox input[type="checkbox"]:checked + .wpcf7-list-item-label::after {
+  opacity: 1;
+}
+
+/* チェックボックス自体は非表示 */
+.p-contact-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.p-contact__data {
+  position: relative;
+  font-size: 14px;
+
+  input[type="date"] {
+    padding-block-end: 11px;
+    padding-inline-start: 8px;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 50%;
+    left: auto;
+    right: 17px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+}
+
+.p-contact__data .wpcf7-form-control-wrap {
+    display: block;
+}
+
+// プライバシーポリシー
+.p-contact__privacy {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.8;
+    letter-spacing: 0.8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.p-contact__privacy .wpcf7-list-item {
+  margin: 0;
+}
+
+/* ラベルを安定させる */
+.p-contact__privacy label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.p-contact__privacy input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  vertical-align: middle;
+  margin: 0;
+  width: 28px;
+  height: 28px;
+  border: 2px solid v.$light-gray;
+  border-radius: 4px;
+  background: #fff;
+  position: relative;
+  cursor: pointer;
+}
+
+/* チェック時 */
+.p-contact__privacy input[type="checkbox"]:checked {
+  background: v.$light-gray;
+}
+
+/* チェックマーク */
+.p-contact__privacy input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 5px;
+  width: 6px;
+  height: 12px;
+  border-right: 2px solid v.$main-color;
+  border-bottom: 2px solid v.$main-color;
+  transform: rotate(45deg);
+}
+
+/* テキストと横並び */
+.p-contact__privacy label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.p-contact__privacy-open {
+    color: v.$main-color;
+    text-decoration: underline;
+    padding-inline-start: 16px;
+    cursor: pointer;
+}
+
+.p-contact__submit {
+    margin-block-start: 60px;
+    text-align: center;
+
+    @media (max-width: 767px) {
+        margin-block-start: 40px;
+    }
+}
+
+// ===================================
+// 全体設定
+// ===================================
+input[type=text],
+input[type=email],
+input[type=tel],
+input[type=date],
+select,
+textarea {
+  width: 100%;
+  padding: 15px 20px;
+  border: 2px solid v.$light-gray;
+  background: v.$white;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 1.8;
+  letter-spacing: 0.8px;
+
+  &::placeholder {
+    color: #BBBBBB;
+  }
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: none; // Safari対策（青っぽい影も消す）
+}
+
+// テキストエリア
+textarea {
+  height: 220px;
+  resize: vertical;
+
+  @media (max-width: 767px) {
+    height: 150px;
+  }
+}
+
+.wpcf7-spinner {
+  display: none;
+}

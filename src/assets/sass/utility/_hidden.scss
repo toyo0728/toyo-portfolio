@@ -1,0 +1,13 @@
+@use "../global/" as v;
+
+.hidden-pc {
+  @media (min-width: 767px) {
+    display: none;
+  }
+}
+
+.hidden-sp {
+  @media (max-width: 767px) {
+    display: none;
+  }
+}

@@ -1,0 +1,256 @@
+@use '../global' as v;
+
+.p-mv {
+  margin-block-start: 20px;
+
+  @media (max-width: 767px) {
+    margin-block-start: 40px;
+    margin-block-end: 40px;
+  }
+}
+
+.p-mv__inner {
+  display: grid;
+  gap: 16px;
+
+  @media (max-width: 767px) {
+    gap: 40px;
+  }
+}
+
+.p-mv__row {
+  overflow: hidden;
+}
+
+.p-mv__slider {
+  width: 100%;
+
+  // 初期は非表示
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+// スライダー表示
+.p-mv.is-sliders-visible .p-mv__slider {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.p-mv__slide {
+  width: 360px;
+
+  @media (max-width: 767px) {
+    width: 270px;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.p-mv__center {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-block: 48px;
+  overflow: hidden;
+
+  @media (max-width: 767px) {
+    gap: 16px;
+    padding-block: 24px;
+  }
+}
+
+/* =================================
+   中央スライダー reveal 用
+================================= */
+.p-mv__reveal {
+  position: relative;
+  z-index: 1;
+  clip-path: circle(0% at 50% 50%);
+  transform: scale(0.96);
+  opacity: 1;
+}
+
+/* 円展開スタート */
+.p-mv.is-reveal-start .p-mv__reveal {
+  animation: mv-circle-reveal 1s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    mv-reveal-scale 1s ease forwards;
+}
+
+/* 中央スライダーは reveal で見せるので、初期非表示ルールから外す */
+.p-mv__reveal .p-mv__slider {
+  opacity: 1;
+  transform: none;
+  pointer-events: none;
+}
+
+.p-mv__slider--center {
+  position: relative;
+  z-index: 1;
+}
+
+.p-mv__copy-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.p-mv__copy-wrap-inner {
+  background: v.$white;
+  padding: 48px 60px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.8s ease, transform 0.8s ease, visibility 0s linear 0.8s;
+
+  @media (max-width: 1024px) {
+    padding: 24px 12px;
+    gap: 16px;
+  }
+}
+
+.p-mv.is-copy-visible .p-mv__copy-wrap-inner {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.8s ease, transform 0.8s ease, visibility 0s linear 0s;
+}
+
+.p-mv__copy-main {
+  color: v.$black;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 160%;
+  letter-spacing: 1.44px;
+
+  @media (max-width: 767px) {
+    font-size: 22px;
+    letter-spacing: 0.88px;
+  }
+}
+
+.p-mv__copy {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+.p-mv__copy-en {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: v.$black;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: 0.4px;
+
+  @media (max-width: 767px) {
+    font-size: 12px;
+    letter-spacing: 0.24px;
+  }
+}
+
+.p-mv__copy-line {
+  width: 16px;
+  height: 1px;
+  background: v.$black;
+}
+
+/* =========================
+   marquee（CSS駆動）
+========================= */
+
+.js-mv-swiper {
+  --mv-gap: 24px;
+
+  @media (min-width: 768px) {
+    --mv-gap: 32px;
+  }
+
+  @media (min-width: 1025px) {
+    --mv-gap: 100px;
+  }
+}
+
+.js-mv-swiper[data-center='true'] {
+  --mv-gap: 80px;
+}
+
+.js-mv-swiper .swiper-wrapper {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: mv-marquee var(--mv-duration, 40s) linear infinite;
+  animation-play-state: paused;
+}
+
+.p-mv.is-marquee-start .js-mv-swiper .swiper-wrapper {
+  animation-play-state: running;
+}
+
+@keyframes mv-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(calc(-1 * var(--mv-distance, 0px)), 0, 0);
+  }
+}
+
+.js-mv-swiper[data-direction='reverse'] .swiper-wrapper {
+  animation-direction: reverse;
+}
+
+.js-mv-swiper .swiper-slide {
+  flex: 0 0 auto;
+  margin-right: var(--mv-gap);
+}
+
+.js-mv-swiper,
+.js-mv-swiper * {
+  pointer-events: none;
+}
+
+/* =========================
+   reveal animation
+========================= */
+
+@keyframes mv-circle-reveal {
+  0% {
+    clip-path: circle(0% at 50% 50%);
+  }
+  100% {
+    clip-path: circle(90% at 50% 50%);
+  }
+}
+
+@keyframes mv-reveal-scale {
+  0% {
+    transform: scale(0.96);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

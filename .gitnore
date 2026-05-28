@@ -1,0 +1,20 @@
+# node
+node_modules/
+
+# mac
+.DS_Store
+
+# build files
+dist/
+
+# sourcemap
+*.map
+
+# env
+.env
+
+# vscode
+.vscode/
+
+# logs
+npm-debug.log*

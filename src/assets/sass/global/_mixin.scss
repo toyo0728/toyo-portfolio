@@ -1,0 +1,3 @@
+@forward "./variables"; // ← 変数を外部に公開
+@use "sass:map";
+@use "./variables" as v;
